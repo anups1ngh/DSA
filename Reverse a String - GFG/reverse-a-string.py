@@ -1,10 +1,7 @@
 #User function Template for python3
 
 def reverseWord(s):
-    ans = ""
-    for i in range(1,len(s)+1):
-        ans+=s[-i]
-    return ans
+    return s[::-1]
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
