@@ -4,11 +4,10 @@ class Solution:
     #Function to return the count of number of elements in union of two arrays.
     def doUnion(self,a,n,b,m):
         
-        #code here
+        #code herez
         a = set(a)
         a.update(b)
         return len(a)
-
 
 #{ 
  # Driver Code Starts
