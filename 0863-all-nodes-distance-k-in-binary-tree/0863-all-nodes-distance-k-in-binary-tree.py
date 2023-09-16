@@ -5,47 +5,42 @@
 #         self.left = None
 #         self.right = None
 
+def distanceHelper(root,target,k,out):
+    if root is None:
+        return -1
+    if root == target:
+        helper(root,k,out)
+        return 0
+    ld = distanceHelper(root.left,target,k,out)
+    if ld == -1:
+        rd = distanceHelper(root.right,target,k,out)
+        if rd == -1:
+            return -1
+        elif rd+1 == k:
+            out.append(root.val)
+            return k
+        else:
+            helper(root.left,k-rd-2,out)
+            return rd+1
+    elif ld+1 == k:
+        out.append(root.val)
+        return k
+    else:
+        helper(root.right,k-ld-2,out)
+        return ld+1
+        
+        
+def helper(root,k,out):
+    if root is None:
+        return
+    if k==0 and root is not None:
+        out.append(root.val)
+        return
+    helper(root.left,k-1,out)
+    helper(root.right,k-1,out)
+    
 class Solution:
-    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
-        def findTarget(root, target, path):
-            if root is None:
-                return False
-            if root == target:
-                path.append(root)
-                return True
-            if findTarget(root.left, target, path) or findTarget(root.right, target, path):
-                path.append(root)
-                return True
-            return False
-        
-        def printkDistanceNodeDown(root, k, result):
-            if root is None or k < 0:
-                return
-            if k == 0:
-                result.append(root.val)
-                return
-            printkDistanceNodeDown(root.left, k - 1, result)
-            printkDistanceNodeDown(root.right, k - 1, result)
-
-        def distanceKHelper(root, target, k, result):
-            path = []
-            findTarget(root, target, path)
-            
-            for i, node in enumerate(path):
-                if i == 0:
-                    printkDistanceNodeDown(node, k, result)
-                else:
-                    # Calculate distance to target node
-                    distance_to_target = k - i
-                    if distance_to_target < 0:
-                        break
-                    if distance_to_target == 0:
-                        result.append(node.val)
-                    elif node.left == path[i - 1]:
-                        printkDistanceNodeDown(node.right, distance_to_target - 1, result)
-                    else:
-                        printkDistanceNodeDown(node.left, distance_to_target - 1, result)
-        
-        result = []
-        distanceKHelper(root, target, k, result)
-        return result
+    def distanceK(self, root, target, k):
+        output = []
+        distanceHelper(root,target,k,output)
+        return output
