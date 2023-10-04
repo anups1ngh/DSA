@@ -22,7 +22,7 @@ public:
         
         int diff = abs(treeHeight(root->left) - treeHeight(root->right));
     
-        return diff <= 1 && isBalanced(root->left) && isBalanced(root->right);     
+        return diff <= 1 && isBalanced(root->right) && isBalanced(root->left);     
     
     }
 };
