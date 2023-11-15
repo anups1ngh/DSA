@@ -1,17 +1,9 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        a,b='',''
-        for i in s:
-            if 'a'<=i<='z' or 'A'<=i<='Z' or '0'<=i<='9':
-                if 'A'<=i<='Z':
-                    i=i.lower()
-                a+=i
-        if a=='':
-            return True
-        for i in range(len(a)-1,-1,-1):
-            b+=a[i]
-        print(b)
-        if a==b:
-            return True
+        temp = ''.join(i for i in s.lower() if i.isalnum())
+        mid = len(temp)//2
+        l = len(temp)
+        if l%2 != 0:
+            return temp[:mid] == temp[mid+1:][::-1]
         else:
-            return False
+            return temp[:mid] == temp[mid:][::-1]
